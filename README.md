@@ -16,12 +16,14 @@ A modern, production-ready Next.js template with built-in best practices and dev
 ## 🛠 Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd next-template
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -56,6 +58,7 @@ A modern, production-ready Next.js template with built-in best practices and dev
 ### Git Workflow
 
 1. Create a new branch for your feature/fix
+
    ```bash
    git checkout -b feat/your-feature-name
    ```
@@ -63,6 +66,7 @@ A modern, production-ready Next.js template with built-in best practices and dev
 2. Make your changes following our code style guidelines
 
 3. Commit your changes using conventional commits
+
    ```bash
    git commit -m "feat: add new feature"
    ```
@@ -94,12 +98,12 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ## 📚 Project Structure
 
 ```
-├── app/                # Next.js app directory
-├── components/       # Reusable components
-├── lib/              # Utility functions and shared logic
-│   └── types/        # TypeScript type definitions
-├── public/           # Static assets
-└── tests/           # Test files
+├── app/           # Next.js app directory
+├── components/    # Reusable components
+├── lib/           # Utility functions and shared logic
+│   └── types/       # TypeScript type definitions
+├── public/        # Static assets
+└── tests/         # Test files
 ```
 
 ## 🤝 Contributing
@@ -109,5 +113,3 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
-
-
