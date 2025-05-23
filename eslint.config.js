@@ -3,6 +3,8 @@ const js = require('@eslint/js')
 const eslintConfigPrettier = require('eslint-config-prettier')
 const pluginImport = require('eslint-plugin-import')
 const pluginReact = require('eslint-plugin-react')
+const pluginTestingLibrary = require('eslint-plugin-testing-library')
+const pluginVitest = require('eslint-plugin-vitest')
 const globals = require('globals')
 const tseslint = require('typescript-eslint')
 
@@ -147,6 +149,61 @@ module.exports = [
 		rules: {
 			'@typescript-eslint/no-require-imports': 'off',
 			'no-magic-numbers': 'off', // Config files often have reasonable magic numbers
+		},
+	},
+
+	// Testing configuration for test files
+	{
+		files: ['**/*.test.{js,ts,tsx}', '**/*.spec.{js,ts,tsx}', 'tests/**/*'],
+		plugins: {
+			vitest: pluginVitest,
+			'testing-library': pluginTestingLibrary,
+		},
+		languageOptions: {
+			globals: {
+				...pluginVitest.environments.env.globals,
+			},
+		},
+		rules: {
+			// Vitest rules
+			'vitest/expect-expect': 'warn', // Allow tests without assertions (some are demos)
+			'vitest/no-commented-out-tests': 'warn',
+			'vitest/no-disabled-tests': 'warn',
+			'vitest/no-focused-tests': 'error',
+			'vitest/prefer-to-be': 'error',
+			'vitest/prefer-to-have-length': 'error',
+			'vitest/valid-expect': 'error',
+
+			// Testing Library rules (more lenient for demo files)
+			'testing-library/await-async-queries': 'warn',
+			'testing-library/await-async-utils': 'warn',
+			'testing-library/no-await-sync-queries': 'warn',
+			'testing-library/no-dom-import': 'error',
+			'testing-library/prefer-screen-queries': 'off', // Allow destructuring in demos
+			'testing-library/render-result-naming-convention': 'warn',
+
+			// Allow any types in tests for flexibility
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-non-null-assertion': 'warn', // Allow in tests but warn
+			// Allow magic numbers in tests (common for assertions)
+			'no-magic-numbers': 'off',
+			// Allow unused variables in tests (common for destructuring)
+			'@typescript-eslint/no-unused-vars': 'warn',
+			// Allow constants in expressions (common in test assertions)
+			'no-constant-binary-expression': 'off',
+		},
+	},
+
+	// More lenient rules for example/demo components
+	{
+		files: ['components/example/**/*', 'tests/components/example/**/*', 'tests/e2e/**/*'],
+		rules: {
+			// Turn off strict rules for demo files
+			'no-nested-ternary': 'warn',
+			'testing-library/prefer-screen-queries': 'off',
+			'vitest/expect-expect': 'off',
+			'@typescript-eslint/no-unused-vars': 'off',
+			'no-constant-binary-expression': 'off',
 		},
 	},
 ]

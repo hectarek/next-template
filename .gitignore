@@ -12,6 +12,22 @@
 
 # testing
 /coverage
+coverage/
+*.lcov
+
+# vitest
+.vitest/
+vitest.config.ts.timestamp-*
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# lighthouse
+.lighthouseci/
+lhci_reports/
 
 # next.js
 /.next/
@@ -39,3 +55,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db

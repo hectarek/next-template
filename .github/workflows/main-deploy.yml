@@ -1,0 +1,368 @@
+name: 🚀 Main Branch Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual triggers
+
+# Ensure only one deployment runs at a time
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+
+jobs:
+  # Job 1: Comprehensive Code Quality
+  strict-quality:
+    name: 🔒 Strict Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for better analysis
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🎨 Strict Prettier Check
+        run: |
+          bun run format:check
+          if [ $? -ne 0 ]; then
+            echo "❌ Code formatting issues found. All code must be properly formatted."
+            exit 1
+          fi
+
+      - name: 🔍 Strict ESLint Check
+        run: |
+          bun run lint
+          if [ $? -ne 0 ]; then
+            echo "❌ Linting errors found. All linting issues must be resolved."
+            exit 1
+          fi
+
+      - name: 🏷️ Strict TypeScript Check
+        run: |
+          bun run type-check
+          if [ $? -ne 0 ]; then
+            echo "❌ TypeScript errors found. All type issues must be resolved."
+            exit 1
+          fi
+
+      - name: 🏗️ Production Build
+        run: |
+          bun run build
+          if [ $? -ne 0 ]; then
+            echo "❌ Build failed. Production build must succeed."
+            exit 1
+          fi
+
+      - name: 📊 Bundle Size Analysis
+        run: |
+          echo "📦 Analyzing bundle size..."
+          find .next/static -name "*.js" -exec wc -c {} + | sort -n
+          # You can add bundle size limits here
+
+  # Job 2: Comprehensive Testing with Coverage Requirements
+  comprehensive-tests:
+    name: 🧪 Comprehensive Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🧪 Run Unit Tests with Coverage
+        run: |
+          bun run test:coverage --run
+          echo "📊 Checking coverage thresholds..."
+
+      - name: 📈 Enforce Coverage Thresholds
+        run: |
+          # Extract coverage percentage (customize based on your coverage report format)
+          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+          echo "Current coverage: $COVERAGE%"
+          
+          # Enforce minimum coverage (adjust threshold as needed)
+          if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+            echo "❌ Coverage ($COVERAGE%) is below required threshold (80%)"
+            exit 1
+          fi
+          echo "✅ Coverage requirement met: $COVERAGE%"
+        continue-on-error: true # Remove this when you want to enforce
+
+      - name: 📤 Upload Coverage Reports
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage/lcov.info
+          flags: production
+          name: production-coverage
+          fail_ci_if_error: true
+
+  # Job 3: Cross-Browser E2E Testing
+  cross-browser-e2e:
+    name: 🌐 Cross-Browser E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+      fail-fast: false # Continue testing other browsers if one fails
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🎭 Install Playwright Browsers
+        run: bunx playwright install --with-deps
+
+      - name: 🎭 Run E2E Tests - ${{ matrix.browser }}
+        run: bun run test:e2e --project=${{ matrix.browser }}
+        env:
+          CI: true
+
+      - name: 📤 Upload Test Results - ${{ matrix.browser }}
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-results-${{ matrix.browser }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 30
+
+  # Job 4: Performance & Lighthouse Audit
+  performance-audit:
+    name: ⚡ Performance Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [strict-quality]
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🏗️ Build for Production
+        run: bun run build
+
+      - name: 🚀 Start Production Server
+        run: |
+          bun run start &
+          sleep 10 # Wait for server to start
+        env:
+          PORT: 3000
+
+      - name: 🔍 Run Lighthouse Audit
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: '.lighthouserc.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        continue-on-error: true # Don't fail deployment on performance issues initially
+
+  # Job 5: Security & Vulnerability Assessment
+  security-audit:
+    name: 🛡️ Security Assessment
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🔍 Security Audit
+        run: |
+          bun audit --audit-level moderate
+          if [ $? -ne 0 ]; then
+            echo "⚠️ Security vulnerabilities found. Please review and update dependencies."
+            # Uncomment to make this blocking:
+            # exit 1
+          fi
+
+      - name: 🛡️ Advanced Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: 📤 Upload Security Results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Job 6: Build & Package for Deployment
+  build-package:
+    name: 📦 Build & Package
+    runs-on: ubuntu-latest
+    needs: [strict-quality, comprehensive-tests]
+    timeout-minutes: 10
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🏗️ Build Production Bundle
+        run: bun run build
+
+      - name: 📤 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: |
+            .next/
+            public/
+            package.json
+            next.config.js
+          retention-days: 30
+
+  # Job 7: Deploy (placeholder - customize for your deployment target)
+  deploy:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [strict-quality, comprehensive-tests, cross-browser-e2e, build-package]
+    timeout-minutes: 10
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+
+      - name: 🚀 Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+        continue-on-error: true # Remove when secrets are configured
+
+      # Alternative deployment options:
+      # 
+      # - name: 🚀 Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v3.0
+      #   with:
+      #     publish-dir: '.next'
+      #     production-branch: main
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     deploy-message: "Deploy from GitHub Actions"
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  # Job 8: Post-Deploy Validation
+  post-deploy-validation:
+    name: ✅ Post-Deploy Validation
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    timeout-minutes: 10
+    if: success()
+
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 📦 Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🌐 Health Check
+        run: |
+          echo "🔍 Running post-deployment health checks..."
+          # Add your production URL health checks here
+          # curl -f https://your-production-url.com/health || exit 1
+        continue-on-error: true
+
+      - name: 🎭 Smoke Tests on Production
+        run: |
+          echo "🔥 Running smoke tests on production..."
+          # Add production smoke tests here
+          # bun run test:e2e:production
+        continue-on-error: true
+
+  # Job 9: Notify Team
+  notify:
+    name: 📢 Notify Team
+    runs-on: ubuntu-latest
+    needs: [deploy, post-deploy-validation]
+    if: always()
+
+    steps:
+      - name: 📢 Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#deployments'
+          text: |
+            🚀 *Main Branch Deployment*
+            
+            *Status:* ${{ job.status == 'success' && '✅ Success' || '❌ Failed' }}
+            *Branch:* `${{ github.ref_name }}`
+            *Commit:* `${{ github.sha }}`
+            *Author:* ${{ github.actor }}
+            
+            <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Details>
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        continue-on-error: true 
