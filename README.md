@@ -1,17 +1,23 @@
 # Next.js Template
 
-A modern, production-ready Next.js template with built-in best practices and development tools.
+A modern, production-ready Next.js template with built-in best practices and development tools for team collaboration.
 
 ## 🚀 Features
 
-- ⚡️ Next.js 15 with App Router
-- 🎨 Tailwind CSS for styling
-- 📝 TypeScript for type safety
-- 🎯 ESLint + Prettier for code quality
-- 🐶 Husky for Git hooks
-- 📦 Conventional Commits
-- 🔍 Type checking
-- 🧪 Testing setup (Jest + React Testing Library)
+- ⚡️ **Next.js 15** with App Router and React 19
+- 🎨 **Tailwind CSS** for styling with modern CSS
+- 📝 **TypeScript** for type safety
+- 🎯 **ESLint** + **Prettier** with comprehensive rules for code quality
+- 🐶 **Husky** for Git hooks and automated quality checks
+- 📦 **Conventional Commits** with automated validation
+- 🔍 **TypeScript** type checking in pre-commit hooks
+- 🎪 **lint-staged** for optimized pre-commit processing
+- 📚 **Comprehensive Development Guide** with team best practices
+
+## 📖 Documentation
+
+- **[Development Guide](./DEVELOPMENT_GUIDE.md)** - Comprehensive coding standards, ESLint rules, and best practices
+- **[Getting Started](#development-setup)** - Quick setup instructions below
 
 ## 🛠 Development Setup
 
@@ -47,13 +53,24 @@ A modern, production-ready Next.js template with built-in best practices and dev
 
 ## 📝 Development Guidelines
 
+> **📚 For comprehensive coding standards, ESLint rules, and best practices, see our [Development Guide](./DEVELOPMENT_GUIDE.md)**
+
+### Quick Reference
+
+- **File Naming**: Use kebab-case for all files in `app/` and `components/` folders
+- **Imports**: Automatically organized by ESLint (external → internal → relative)
+- **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/) format
+- **Pre-commit**: ESLint, Prettier, and TypeScript checking runs automatically
+
 ### Code Style
 
 - We use Prettier for code formatting
-- ESLint for code linting
+- ESLint for code linting with 40+ quality rules
 - TypeScript for type safety
 - Follow the component structure in `/components`
 - Use proper TypeScript types for all components and functions
+
+## 📝 Development Guidelines
 
 ### Git Workflow
 
