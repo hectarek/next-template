@@ -15,9 +15,76 @@ const compat = new FlatCompat({
 })
 
 module.exports = [
-	// Global ignores
+	// Global ignores - Add comprehensive patterns for build artifacts and generated files
 	{
-		ignores: ['node_modules/', '.next/', 'public/', '.husky/', 'out/'],
+		ignores: [
+			// Build and output directories
+			'node_modules/',
+			'.next/',
+			'out/',
+			'build/',
+			'dist/',
+
+			// Development and tooling files
+			'.husky/',
+			'.lighthouseci/',
+			'coverage/',
+			'nyc_output/',
+
+			// Static assets (usually don't need linting)
+			'public/',
+
+			// Generated code (Prisma, GraphQL, etc.)
+			'lib/generated/',
+			'**/generated/',
+			'**/*.generated.*',
+
+			// TypeScript build info and declaration maps
+			'*.tsbuildinfo',
+			'**/*.tsbuildinfo',
+			'**/*.d.ts.map',
+
+			// Package manager files
+			'*.lock',
+			'package-lock.json',
+			'yarn.lock',
+			'pnpm-lock.yaml',
+			'bun.lock',
+
+			// Environment and config files (often contain sensitive data)
+			'.env*',
+			'!.env.example',
+
+			// IDE and editor files
+			'.vscode/',
+			'.idea/',
+			'*.swp',
+			'*.swo',
+			'*~',
+
+			// OS generated files
+			'.DS_Store',
+			'Thumbs.db',
+
+			// Test and coverage reports
+			'test-results/',
+			'playwright-report/',
+			'blob-report/',
+
+			// Logs
+			'logs/',
+			'*.log',
+			'npm-debug.log*',
+			'yarn-debug.log*',
+			'yarn-error.log*',
+			'pnpm-debug.log*',
+
+			// Temporary files
+			'tmp/',
+			'temp/',
+			'.tmp/',
+			'.temp/',
+		],
 	},
 
 	// Basic JavaScript rules

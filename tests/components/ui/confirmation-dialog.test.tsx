@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import ConfirmationDialog, { type ConfirmationDialogProps } from '@/components/example/confirmation-dialog'
+import ConfirmationDialog, { type ConfirmationDialogProps } from '@/components/ui/confirmation-dialog'
 
 const defaultProps: ConfirmationDialogProps = {
 	open: true,

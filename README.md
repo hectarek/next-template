@@ -219,3 +219,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🗄️ Database & API
+
+This template includes a complete **API-first architecture** with Prisma ORM:
+
+### Features
+
+- **Prisma ORM** with PostgreSQL support
+- **Type-safe** database operations
+- **RESTful API** routes with full CRUD operations
+- **Service layer** for business logic
+- **API client** for frontend integration
+- **Seed data** for quick development
+- **Future-proof** design for auth and storage integration
+
+### Quick Start
+
+```bash
+# Set up your database URL in .env.local
+DATABASE_URL="postgresql://user:password@localhost:5432/your_db"
+
+# Generate Prisma client and set up database
+bun run db:generate
+bun run db:push
+bun run db:seed
+
+# Start development server
+bun run dev
+```
+
+### Example Usage
+
+```tsx
+import { createUser, getUsers } from '@/lib/api/users'
+
+// Create a user
+const user = await createUser({
+	email: 'user@example.com',
+	name: 'John Doe',
+})
+
+// Get users with pagination
+const { users, total } = await getUsers({ page: 1, limit: 10 })
+```
+
+📚 **[Full Prisma Documentation](./docs/PRISMA_SETUP.md)**
+
+---

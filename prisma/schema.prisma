@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - designed to be auth-agnostic
+// Can be extended later with auth providers (NextAuth, Clerk, etc.)
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  avatar    String?  // Future: could link to storage service
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  posts     Post[]
+  comments  Comment[]
+
+  // Future extensibility
+  metadata  Json?    // For storing additional user data
+  isActive  Boolean  @default(true)
+
+  @@map("users")
+}
+
+// Post model - example content entity
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String?
+  excerpt     String?
+  published   Boolean  @default(false)
+  featuredImage String? // Future: could link to storage service
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
+  categories  Category[]
+  comments    Comment[]
+
+  // Future extensibility
+  metadata    Json?    // For SEO, custom fields, etc.
+  views       Int      @default(0)
+
+  @@map("posts")
+}
+
+// Category model - for organizing content
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
+  description String?
+  color       String? // For UI theming
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  posts       Post[]
+
+  @@map("categories")
+}
+
+// Comment model - for user interactions
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  // Self-referencing for replies
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  parentId  String?
+  replies   Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+// Enum for user roles - easily extensible
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+}
