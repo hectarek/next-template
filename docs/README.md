@@ -2,13 +2,15 @@
 
 Welcome to the comprehensive developer documentation for our Next.js template. This documentation is designed to help developers of all levels understand and contribute to our codebase effectively.
 
+> **Getting Started?** See the [main README](../README.md) for quick setup instructions.
+
 ## 🛠️ Technology Stack
 
 ### **Core Framework & Language**
 
 - **[Next.js 15](https://nextjs.org/docs)** - Full-stack React framework with App Router
 - **[TypeScript](https://www.typescriptlang.org/docs/)** - Type-safe JavaScript for better development experience
-- **[React 18](https://react.dev/learn)** - UI library with Server Components support
+- **[React 19](https://react.dev/learn)** - UI library with Server Components support
 
 ### **Database & ORM**
 
@@ -104,23 +106,6 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 │  ┌─── Prisma ORM     ├─── Type Safety    ├─── Migrations   │
 └─────────────────────────────────────────────────────────────┘
 ```
-
-## 📋 Prerequisites & Setup
-
-### **Required Software**
-
-- **[Node.js 18+](https://nodejs.org/)** - JavaScript runtime (use [nvm](https://github.com/nvm-sh/nvm) for version management)
-- **[Bun](https://bun.sh/docs/installation)** - Package manager and runtime
-- **[PostgreSQL 14+](https://www.postgresql.org/download/)** - Database
-- **[Git](https://git-scm.com/downloads)** - Version control
-
-### **Recommended Editor Setup**
-
-- **[VS Code](https://code.visualstudio.com/)** with extensions:
-  - [TypeScript Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next)
-  - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-  - [Prisma Extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
-  - [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## 🎯 Coding Standards
 
