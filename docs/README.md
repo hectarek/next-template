@@ -1,8 +1,49 @@
 # 📚 Developer Documentation
 
-Welcome to the comprehensive developer documentation for our Next.js template. This documentation is designed to help developers of all levels understand and contribute to our codebase effectively.
+Welcome to the comprehensive developer documentation for our Next.js template. This documentation is organized into **repo-specific guides** for this exact project and **general development concepts** for broader learning.
 
 > **Getting Started?** See the [main README](../README.md) for quick setup instructions.
+
+## 🚀 For This Project
+
+These guides are **specific to this Next.js template** with our exact stack and configuration.
+
+### **⚡ Quick Setup & Deployment**
+
+- **[Project Setup Guide](./development/SETUP.md)** - Setup this specific template (Bun, Prisma, PostgreSQL)
+- **[Vercel Deployment](./deployment/VERCEL.md)** - Deploy this project to Vercel (our chosen platform)
+
+### **🏗️ Architecture & Code**
+
+- **[Architecture Overview](./architecture/OVERVIEW.md)** - Our specific system design and patterns
+- **[Our API Reference](./api/OUR_API.md)** - Specific endpoints and patterns we implement
+- **[Our Testing Setup](./testing/OUR_TESTING.md)** - Vitest, Playwright, and testing patterns we use
+
+### **🎨 Development Workflow**
+
+- **[Component Development Guide](./components/DEVELOPMENT_GUIDE.md)** - Building components with our UI system
+- **[Database & Service Layer](./database/SERVICE_LAYER.md)** - Working with Prisma and our service patterns
+- **[Error Handling Patterns](./error-handling/PATTERNS.md)** - Our error handling approach
+
+## 📖 General Knowledge
+
+These guides provide **broader development concepts** and educational content that applies beyond this specific project.
+
+### **🌐 Web Development Concepts**
+
+- **[Client vs Server Components](./architecture/RENDERING_PATTERNS.md)** - Next.js rendering patterns and best practices
+- **[API Design Concepts](./api/CONCEPTS.md)** - REST API principles and patterns
+- **[Testing Concepts](./testing/CONCEPTS.md)** - Testing strategies and methodologies
+
+### **🚀 Deployment & DevOps**
+
+- **[Deployment Concepts](./deployment/CONCEPTS.md)** - Platform options, strategies, and DevOps principles
+- **[General Production Practices](./deployment/GENERAL_PRODUCTION.md)** - Production setup across different platforms
+- **[Development Concepts](./development/GENERAL_CONCEPTS.md)** - General development workflow principles
+
+### **⚡ Performance & Optimization**
+
+- **[Performance Optimization](./performance/OPTIMIZATION.md)** - Performance best practices and monitoring
 
 ## 🛠️ Technology Stack
 
@@ -19,7 +60,7 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 
 ### **Styling & UI**
 
-- **[Tailwind CSS](https://tailwindcss.com/docs)** - Utility-first CSS framework
+- **[Tailwind CSS v4](https://tailwindcss.com/docs)** - Utility-first CSS framework
 - **[Radix UI](https://www.radix-ui.com/primitives)** - Unstyled, accessible UI primitives
 - **[Lucide Icons](https://lucide.dev/)** - Beautiful & consistent icon set
 
@@ -31,58 +72,35 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 - **[ESLint](https://eslint.org/docs/latest/)** - Code linting and consistency
 - **[Prettier](https://prettier.io/docs/en/)** - Code formatting
 
-### **Additional Tools**
+## 🎯 Quick Start Paths
 
-- **[React Hook Form](https://react-hook-form.com/get-started)** - Performant forms with easy validation
-- **[Zod](https://zod.dev/)** - TypeScript-first schema validation
-- **[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)** - Simple and complete testing utilities
+### **For New Team Members**
 
-## 🗺️ Documentation Map
+1. **[Project Setup Guide](./development/SETUP.md)** - Get this project running locally
+2. **[Architecture Overview](./architecture/OVERVIEW.md)** - Understand our system design
+3. **[Our API Reference](./api/OUR_API.md)** - Learn our API patterns
+4. **[Component Development Guide](./components/DEVELOPMENT_GUIDE.md)** - Start building features
 
-### 🏗️ **Architecture & Patterns**
+### **For API Development**
 
-- **[Architecture Overview](./architecture/OVERVIEW.md)** - High-level system design and principles
-- **[Client vs Server Components](./architecture/RENDERING_PATTERNS.md)** - Next.js rendering patterns and best practices
-- **[Component Development Guide](./components/DEVELOPMENT_GUIDE.md)** - Building reusable, maintainable components
+1. **[Our API Reference](./api/OUR_API.md)** - Current endpoints and patterns
+2. **[Database & Service Layer](./database/SERVICE_LAYER.md)** - Work with Prisma and data
+3. **[Error Handling Patterns](./error-handling/PATTERNS.md)** - Robust error handling
+4. **[Our Testing Setup](./testing/OUR_TESTING.md)** - Test your API changes
 
-### 🌐 **API & Data Layer**
+### **For Frontend Development**
 
-- **[API Design Patterns](./api/DESIGN_PATTERNS.md)** - REST API conventions and best practices
-- **[Database & Service Layer](./database/SERVICE_LAYER.md)** - Prisma ORM, service patterns, and data access
-- **[Error Handling Patterns](./error-handling/PATTERNS.md)** - Consistent error handling across all layers
+1. **[Component Development Guide](./components/DEVELOPMENT_GUIDE.md)** - Build UI components
+2. **[Client vs Server Components](./architecture/RENDERING_PATTERNS.md)** - Choose the right pattern
+3. **[Performance Optimization](./performance/OPTIMIZATION.md)** - Make it fast
+4. **[Our Testing Setup](./testing/OUR_TESTING.md)** - Test your components
 
-### 🧪 **Testing & Quality**
+### **For Learning & Growth**
 
-- **[Testing Strategy](./testing/STRATEGY.md)** - Comprehensive testing guide for all application layers
-- **[Performance & Optimization](./performance/OPTIMIZATION.md)** - Performance best practices and monitoring
-
-### 🛠️ **Development & Deployment**
-
-- **[Development Workflow](./development/WORKFLOW.md)** - Setup, scripts, conventions, and team practices
-- **[Deployment & Production](./deployment/PRODUCTION.md)** - Production deployment and environment management
-
-## 🚀 Quick Start Guides
-
-### For New Developers
-
-1. **Start here**: [Architecture Overview](./architecture/OVERVIEW.md) - Understand the big picture
-2. **Learn rendering**: [Client vs Server Components](./architecture/RENDERING_PATTERNS.md) - Master Next.js rendering
-3. **Set up locally**: [Development Workflow](./development/WORKFLOW.md) - Get your environment ready
-4. **Build components**: [Component Development Guide](./components/DEVELOPMENT_GUIDE.md) - Create your first feature
-
-### For API Development
-
-1. **API patterns**: [API Design Patterns](./api/DESIGN_PATTERNS.md) - Learn our REST conventions
-2. **Database layer**: [Database & Service Layer](./database/SERVICE_LAYER.md) - Work with Prisma and data
-3. **Handle errors**: [Error Handling Patterns](./error-handling/PATTERNS.md) - Robust error handling
-4. **Test APIs**: [Testing Strategy](./testing/STRATEGY.md) - Write comprehensive tests
-
-### For Frontend Development
-
-1. **Component patterns**: [Component Development Guide](./components/DEVELOPMENT_GUIDE.md) - Build UI components
-2. **Rendering strategies**: [Client vs Server Components](./architecture/RENDERING_PATTERNS.md) - Choose the right pattern
-3. **Optimize performance**: [Performance & Optimization](./performance/OPTIMIZATION.md) - Make it fast
-4. **Test components**: [Testing Strategy](./testing/STRATEGY.md) - Ensure quality
+1. **[Client vs Server Components](./architecture/RENDERING_PATTERNS.md)** - Modern React patterns
+2. **[API Design Concepts](./api/CONCEPTS.md)** - REST API best practices
+3. **[Testing Concepts](./testing/CONCEPTS.md)** - Testing methodologies
+4. **[Deployment Concepts](./deployment/CONCEPTS.md)** - DevOps and deployment strategies
 
 ## 📊 Architecture at a Glance
 
@@ -109,7 +127,7 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 
 ## 🎯 Coding Standards
 
-### File Organization
+### **File Organization**
 
 ```
 ├── app/                    # Next.js App Router pages
@@ -125,7 +143,7 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 └── docs/                 # Documentation
 ```
 
-### Naming Conventions
+### **Naming Conventions**
 
 - **Files**: `kebab-case` (`user-form.tsx`, `api-client.ts`)
 - **Components**: `PascalCase` (`UserForm`, `ConfirmDialog`)
@@ -133,7 +151,7 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 - **Constants**: `SCREAMING_SNAKE_CASE` (`API_BASE_URL`, `MAX_RETRY_COUNT`)
 - **Types/Interfaces**: `PascalCase` (`CreateUserInput`, `ApiResponse`)
 
-### Key Architecture Principles
+### **Key Architecture Principles**
 
 - **API-First**: All data operations through REST endpoints
 - **Type Safety**: Full TypeScript coverage with strict mode
@@ -143,13 +161,13 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 
 ## 🆘 Getting Help
 
-### **Common Issues & Solutions**
+### **Project-Specific Issues**
 
-- **Build errors**: See [Development Workflow - Troubleshooting](./development/WORKFLOW.md#troubleshooting)
-- **Test failures**: Check [Testing Strategy - Debugging](./testing/STRATEGY.md#debugging-tests)
-- **Performance issues**: Review [Performance Guide](./performance/OPTIMIZATION.md)
-- **API errors**: Consult [Error Handling Patterns](./error-handling/PATTERNS.md)
-- **Database issues**: See [Database Guide](./database/SERVICE_LAYER.md)
+- **Setup problems**: See [Project Setup Guide](./development/SETUP.md)
+- **Database issues**: Check [Database & Service Layer](./database/SERVICE_LAYER.md)
+- **API errors**: Consult [Our API Reference](./api/OUR_API.md)
+- **Test failures**: Review [Our Testing Setup](./testing/OUR_TESTING.md)
+- **Deployment issues**: Use [Vercel Deployment](./deployment/VERCEL.md)
 
 ### **Learning Resources**
 
@@ -159,32 +177,30 @@ Welcome to the comprehensive developer documentation for our Next.js template. T
 - **[Prisma Getting Started](https://www.prisma.io/docs/getting-started)** - Database modeling and queries
 - **[Tailwind CSS Documentation](https://tailwindcss.com/docs)** - Utility-first CSS
 
-### **Community & Support**
-
-- **Team Conventions**: [Development Workflow](./development/WORKFLOW.md)
-- **Architecture Decisions**: [Architecture Overview](./architecture/OVERVIEW.md)
-- **Best Practices**: Each guide contains practical examples and best practices
-
 ## 📝 Contributing to Documentation
 
 When adding new features or patterns:
 
-1. **Update relevant docs** - Keep documentation in sync with code changes
-2. **Add practical examples** - Include working code snippets that can be copied
-3. **Update this index** - Add new documents to the navigation above
-4. **Cross-reference** - Link to related documentation sections
-5. **Test examples** - Ensure all code examples actually work
+1. **Update repo-specific docs** - Keep implementation guides current
+2. **Add working examples** - Include copy-pastable code from our codebase
+3. **Update this index** - Add new documents to the appropriate section
+4. **Cross-reference** - Link between repo-specific and general concept docs
+5. **Test examples** - Ensure all code examples work with our setup
 
-### Documentation Standards
+### **Documentation Standards**
 
-- **Clear headings** - Use descriptive, hierarchical section titles
-- **Working examples** - Include copy-pastable code snippets
-- **Best practices** - Always include a "Best Practices" section
-- **Resource links** - Link to official documentation and tutorials
-- **Up-to-date** - Keep examples current with latest versions
+- **Clear separation** - Distinguish between "For This Project" and "General Knowledge"
+- **Working examples** - Use real code from our codebase
+- **Practical focus** - Focus on actionable guidance over theory
+- **Current examples** - Keep examples up-to-date with our stack versions
 
 ---
 
-**Next Steps**: Start with the [Architecture Overview](./architecture/OVERVIEW.md) to understand our system design, then move to [Development Workflow](./development/WORKFLOW.md) for hands-on setup.
+**Quick Navigation**:
+
+- **New to the project?** Start with [Project Setup Guide](./development/SETUP.md)
+- **Want to understand the architecture?** See [Architecture Overview](./architecture/OVERVIEW.md)
+- **Ready to deploy?** Use [Vercel Deployment](./deployment/VERCEL.md)
+- **Learning mode?** Explore the "General Knowledge" section above
 
 _Documentation for Next.js Template v1.0_

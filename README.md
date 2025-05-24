@@ -5,7 +5,7 @@ A modern, production-ready Next.js template with built-in best practices, compre
 ## 🚀 Features
 
 - ⚡️ **Next.js 15** with App Router and React 19
-- 🎨 **Tailwind CSS** + **Radix UI** for modern, accessible components
+- 🎨 **Tailwind CSS v4** + **Radix UI** for modern, accessible components
 - 📝 **TypeScript** with strict type checking
 - 🗄️ **Prisma ORM** with PostgreSQL for type-safe database operations
 - 🎯 **ESLint** + **Prettier** with 40+ quality rules
@@ -13,6 +13,7 @@ A modern, production-ready Next.js template with built-in best practices, compre
 - 🐶 **Git Hooks** with Husky and lint-staged
 - 📦 **Conventional Commits** with automated validation
 - 🚀 **CI/CD** with GitHub Actions for quality assurance
+- ☁️ **Vercel Deployment** ready with optimized configuration
 - 📚 **Comprehensive Documentation** with team best practices
 
 ## 🛠 Quick Start
@@ -35,7 +36,7 @@ A modern, production-ready Next.js template with built-in best practices, compre
 3. **Set up database**
 
    ```bash
-   bun run db:migrate:dev
+   bun run db:migrate
    bun run db:seed
    ```
 
@@ -48,29 +49,38 @@ Open [http://localhost:3000](http://localhost:3000) to see your app.
 
 ## 📚 Documentation
 
-For comprehensive guides, best practices, and detailed setup instructions:
+Our documentation is organized into **two main sections**:
 
-**👉 [Complete Developer Documentation](./docs/README.md)**
+### 🚀 **For This Project** (Start Here)
 
-### Quick Links
+**Guides specific to this template and our exact stack:**
 
-- **[Development Workflow](./docs/development/WORKFLOW.md)** - Setup, scripts, and conventions
-- **[Architecture Overview](./docs/architecture/OVERVIEW.md)** - System design and principles
-- **[Component Development](./docs/components/DEVELOPMENT_GUIDE.md)** - Building reusable components
-- **[API Design Patterns](./docs/api/DESIGN_PATTERNS.md)** - REST API best practices
-- **[Testing Strategy](./docs/testing/STRATEGY.md)** - Comprehensive testing guide
-- **[Performance Optimization](./docs/performance/OPTIMIZATION.md)** - Performance best practices
-- **[Deployment Guide](./docs/deployment/PRODUCTION.md)** - Production deployment
+- **[Project Setup Guide](./docs/development/SETUP.md)** - Setup this specific template
+- **[Vercel Deployment](./docs/deployment/VERCEL.md)** - Deploy to production
+- **[Architecture Overview](./docs/architecture/OVERVIEW.md)** - Our system design
+- **[Our API Reference](./docs/api/OUR_API.md)** - Working endpoints and patterns
+- **[Our Testing Setup](./docs/testing/OUR_TESTING.md)** - Testing with our tools
+
+### 📖 **General Knowledge** (Learning & Growth)
+
+**Broader development concepts and educational content:**
+
+- **[Client vs Server Components](./docs/architecture/RENDERING_PATTERNS.md)** - React rendering patterns
+- **[API Design Concepts](./docs/api/CONCEPTS.md)** - REST API principles
+- **[Testing Concepts](./docs/testing/CONCEPTS.md)** - Testing strategies
+- **[Deployment Concepts](./docs/deployment/CONCEPTS.md)** - DevOps principles
+
+**👉 [Complete Documentation Index](./docs/README.md)**
 
 ## 🛠️ Tech Stack
 
-| Category       | Technologies                                   |
-| -------------- | ---------------------------------------------- |
-| **Frontend**   | Next.js 15, React 19, TypeScript, Tailwind CSS |
-| **Backend**    | Next.js API Routes, Prisma ORM, PostgreSQL     |
-| **Testing**    | Vitest, Playwright, React Testing Library      |
-| **Quality**    | ESLint, Prettier, Husky, TypeScript            |
-| **Deployment** | Vercel, Docker, GitHub Actions                 |
+| Category       | Technologies                                      |
+| -------------- | ------------------------------------------------- |
+| **Frontend**   | Next.js 15, React 19, TypeScript, Tailwind CSS v4 |
+| **Backend**    | Next.js API Routes, Prisma ORM, PostgreSQL        |
+| **Testing**    | Vitest, Playwright, React Testing Library         |
+| **Quality**    | ESLint, Prettier, Husky, TypeScript               |
+| **Deployment** | Vercel (configured), Docker support               |
 
 ## 📝 Available Scripts
 
@@ -81,9 +91,9 @@ bun run build        # Build for production
 bun run start        # Start production server
 
 # Database
-bun run db:migrate:dev    # Apply database migrations
-bun run db:seed          # Seed with sample data
-bun run db:studio        # Open Prisma Studio
+bun run db:migrate   # Apply database migrations
+bun run db:seed      # Seed with sample data
+bun run db:studio    # Open Prisma Studio
 
 # Quality & Testing
 bun run lint        # Run ESLint
@@ -91,13 +101,52 @@ bun run format      # Format with Prettier
 bun run type-check  # TypeScript checking
 bun run test        # Run unit tests
 bun run test:e2e    # Run end-to-end tests
+
+# Deployment
+vercel              # Deploy to Vercel
 ```
+
+## 🎯 What's Included
+
+### **Live Demo Features**
+
+- **Homepage**: Architecture overview and tech stack showcase
+- **User Management Demo**: Complete CRUD operations with real API
+- **Working API Endpoints**: REST API with full documentation
+- **Component Examples**: Production-ready UI components
+
+### **Production-Ready Setup**
+
+- **Database Schema**: User management with roles and relationships
+- **API Layer**: Type-safe REST endpoints with error handling
+- **Testing Suite**: Unit, integration, and e2e tests configured
+- **CI/CD Pipeline**: GitHub Actions for quality assurance
+- **Deployment**: Vercel configuration with environment management
+
+## 🚀 Deployment
+
+This template is optimized for **Vercel deployment**:
+
+```bash
+# Deploy to Vercel
+vercel --prod
+
+# Or connect your GitHub repo to Vercel for automatic deployments
+```
+
+**Environment Variables Needed:**
+
+- `DATABASE_URL` - PostgreSQL connection string
+- `NEXTAUTH_SECRET` - Authentication secret key
+- `NEXTAUTH_URL` - Your deployed URL
+
+See [Vercel Deployment Guide](./docs/deployment/VERCEL.md) for detailed instructions.
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feat/amazing-feature`
-3. Follow our [coding standards](./docs/development/WORKFLOW.md#coding-conventions)
+3. Follow our [Project Setup Guide](./docs/development/SETUP.md)
 4. Commit using [conventional commits](https://www.conventionalcommits.org/): `git commit -m 'feat: add amazing feature'`
 5. Push to the branch: `git push origin feat/amazing-feature`
 6. Open a Pull Request
@@ -108,4 +157,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**📚 For detailed documentation, architecture guides, and best practices, visit [./docs/README.md](./docs/README.md)**
+**📚 Ready to start?** Begin with our [Project Setup Guide](./docs/development/SETUP.md) or explore the [Complete Documentation](./docs/README.md).
